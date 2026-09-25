@@ -6,6 +6,7 @@ import '../../../core/theme/app_typography.dart';
 import '../../../core/theme/app_border_radius.dart';
 import '../../../common_widgets/search_bar_widget.dart';
 import '../../../common_widgets/zamora_remote_image.dart';
+import '../../../common_widgets/clay_icon.dart';
 
 final class EventsAgendaScreen extends ConsumerWidget {
   const EventsAgendaScreen({super.key});
@@ -68,7 +69,10 @@ final class EventsAgendaScreen extends ConsumerWidget {
           ),
           child: ClipRRect(
             borderRadius: AppBorderRadius.radiusFull,
-            child: Container(color: AppColors.surfaceContainerHigh),
+            child: Container(
+              color: AppColors.surfaceContainerHigh,
+              child: const ClayIcon(asset: ClayAssets.eventoPersona, size: 34),
+            ),
           ),
         ),
       ],

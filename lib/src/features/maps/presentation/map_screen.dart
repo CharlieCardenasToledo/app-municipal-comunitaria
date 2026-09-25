@@ -8,6 +8,7 @@ import 'package:latlong2/latlong.dart';
 import '../../../core/theme/app_border_radius.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_typography.dart';
+import '../../../common_widgets/clay_icon.dart';
 
 const _zamoraCenter = LatLng(-4.0669, -78.9566);
 const _collectorPosition = LatLng(-4.0717, -78.9584);
@@ -614,7 +615,7 @@ class _CollectorPin extends StatelessWidget {
               border: Border.all(color: AppColors.surfaceContainerLowest, width: 3),
               boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 10)],
             ),
-            child: const Icon(Icons.local_shipping_rounded, color: AppColors.onPrimary),
+            child: const ClayIcon(asset: ClayAssets.recolector, size: 38),
           ),
           const SizedBox(height: 4),
           Container(
@@ -648,7 +649,7 @@ class _DestinationPin extends StatelessWidget {
               border: Border.all(color: AppColors.surfaceContainerLowest, width: 2),
               boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 8)],
             ),
-            child: const Icon(Icons.home_rounded, color: AppColors.onError, size: 18),
+            child: const ClayIcon(asset: ClayAssets.destino, size: 28),
           ),
           const SizedBox(height: 3),
           Container(

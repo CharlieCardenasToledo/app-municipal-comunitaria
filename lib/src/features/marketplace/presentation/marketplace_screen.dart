@@ -79,10 +79,10 @@ final class MarketplaceScreen extends ConsumerWidget {
 
   Widget _buildCategories(BuildContext context) {
     final categories = [
-      ('Productos locales', ClayAssets.commerce),
-      ('Feria libre', ClayAssets.commerce),
-      ('Artesanías', ClayAssets.events),
-      ('Servicios', ClayAssets.avatar),
+      ('Productos locales', ClayAssets.productos),
+      ('Feria libre', ClayAssets.feria),
+      ('Artesanías', ClayAssets.artesania),
+      ('Servicios', ClayAssets.servicios),
     ];
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,

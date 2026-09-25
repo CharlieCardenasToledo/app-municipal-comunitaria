@@ -56,8 +56,8 @@ class _IncidentsScreenState extends State<IncidentsScreen> {
                 runSpacing: 10,
                 children: [
                   _CategoryTile(label: 'Baches', asset: ClayAssets.routes, selected: selectedCategory == 'Baches', onTap: () => setState(() => selectedCategory = 'Baches')),
-                  _CategoryTile(label: 'Alumbrado', asset: ClayAssets.events, selected: selectedCategory == 'Alumbrado', onTap: () => setState(() => selectedCategory = 'Alumbrado')),
-                  _CategoryTile(label: 'Residuos', asset: ClayAssets.routes, selected: selectedCategory == 'Residuos', onTap: () => setState(() => selectedCategory = 'Residuos')),
+                  _CategoryTile(label: 'Alumbrado', asset: ClayAssets.alumbrado, selected: selectedCategory == 'Alumbrado', onTap: () => setState(() => selectedCategory = 'Alumbrado')),
+                  _CategoryTile(label: 'Residuos', asset: ClayAssets.recolector, selected: selectedCategory == 'Residuos', onTap: () => setState(() => selectedCategory = 'Residuos')),
                 ],
               ),
               const SizedBox(height: 28),
@@ -79,9 +79,9 @@ class _IncidentsScreenState extends State<IncidentsScreen> {
               const SizedBox(height: 12),
               Row(
                 children: [
-                  _PhotoTile(icon: Icons.image_not_supported_rounded),
+                  _PhotoTile(asset: ClayAssets.evidencia),
                   const SizedBox(width: 12),
-                  _PhotoTile(icon: Icons.add_a_photo_rounded, label: 'AÑADIR'),
+                  _PhotoTile(asset: ClayAssets.evidencia, label: 'AÑADIR'),
                 ],
               ),
               const SizedBox(height: 28),
@@ -93,8 +93,7 @@ class _IncidentsScreenState extends State<IncidentsScreen> {
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    const ClayIcon(asset: ClayAssets.routes, size: 68),
-                    const ClayIcon(asset: ClayAssets.report, size: 42),
+                    const ClayIcon(asset: ClayAssets.ubicacion, size: 92),
                     Positioned(
                       bottom: 12,
                       left: 12,
@@ -104,7 +103,7 @@ class _IncidentsScreenState extends State<IncidentsScreen> {
                         decoration: BoxDecoration(color: AppColors.surfaceContainerLowest.withValues(alpha: 0.9), borderRadius: AppBorderRadius.radiusMd),
                         child: const Row(
                           children: [
-                            ClayIcon(asset: ClayAssets.routes, size: 18),
+                            ClayIcon(asset: ClayAssets.ubicacion, size: 24),
                             SizedBox(width: 8),
                     Expanded(child: Text('Diego de Vaca y 24 de Mayo, Zamora', overflow: TextOverflow.ellipsis)),
                           ],
@@ -184,10 +183,10 @@ class _CategoryTile extends StatelessWidget {
 }
 
 class _PhotoTile extends StatelessWidget {
-  final IconData icon;
+  final String asset;
   final String? label;
 
-  const _PhotoTile({required this.icon, this.label});
+  const _PhotoTile({required this.asset, this.label});
 
   @override
   Widget build(BuildContext context) => Container(
@@ -201,7 +200,7 @@ class _PhotoTile extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: AppColors.outline),
+            ClayIcon(asset: asset, size: 40),
             if (label != null) ...[
               const SizedBox(height: 4),
               Text(label!, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: AppColors.outline)),
