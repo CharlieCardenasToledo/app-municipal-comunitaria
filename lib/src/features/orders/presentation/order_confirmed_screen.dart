@@ -26,7 +26,7 @@ final class OrderConfirmedScreen extends StatelessWidget {
               const SizedBox(height: 10),
               Text('Tu pedido del Mercado Reina del Cisne fue recibido.', style: AppTypography.bodyLg, textAlign: TextAlign.center),
               const SizedBox(height: 8),
-              Text('Código de pedido #ZM-2048 · Entrega demostrativa', style: AppTypography.bodyMd, textAlign: TextAlign.center),
+              Text('Código de pedido #ZM-2048 · Entrega programada', style: AppTypography.bodyMd, textAlign: TextAlign.center),
               const SizedBox(height: 28),
               FilledButton.icon(
                 onPressed: () => context.go('/dashboard'),

@@ -24,7 +24,7 @@ class _ProximityAlertScreenState extends State<ProximityAlertScreen> {
         children: [
           Text('Recibe avisos a tiempo', style: AppTypography.headlineMd),
           const SizedBox(height: 8),
-          Text('Ajusta qué sucede cerca de ti. Estos cambios solo aplican a esta demo.', style: AppTypography.bodyMd.copyWith(color: AppColors.onSurfaceVariant)),
+          Text('Ajusta qué sucede cerca de ti.', style: AppTypography.bodyMd.copyWith(color: AppColors.onSurfaceVariant)),
           const SizedBox(height: 20),
           Card(
             child: Column(

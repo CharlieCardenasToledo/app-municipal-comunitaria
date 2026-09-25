@@ -65,12 +65,6 @@ GoRouter _createRouter() {
               child: EventsAgendaScreen(),
             ),
           ),
-          GoRoute(
-            path: '/payments',
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: PaymentsScreen(),
-            ),
-          ),
         ],
       ),
 
@@ -123,6 +117,11 @@ GoRouter _createRouter() {
         path: '/parking',
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) => const ParkingScreen(),
+      ),
+      GoRoute(
+        path: '/payments',
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => const PaymentsScreen(),
       ),
     ],
   );

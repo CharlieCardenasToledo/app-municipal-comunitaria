@@ -38,7 +38,7 @@ final class ScheduleScreen extends StatelessWidget {
             icon: Icons.recycling_rounded,
             color: AppColors.primary,
             title: 'Reciclaje',
-            next: 'Información demostrativa',
+            next: 'Información actualizada',
             detail: 'Recuerda separar papel, plástico y vidrio.',
           ),
           const SizedBox(height: 12),

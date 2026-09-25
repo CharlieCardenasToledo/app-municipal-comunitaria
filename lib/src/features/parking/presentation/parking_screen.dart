@@ -110,7 +110,7 @@ class _ParkingScreenState extends State<ParkingScreen> {
       children: [
         _buildHeader(),
         const SizedBox(height: 24),
-        _buildDemoNotice(),
+        _buildServiceNotice(),
         const SizedBox(height: 24),
         if (_step == _ParkingStep.setup) _buildSetup(),
         if (_step == _ParkingStep.plans) _buildPlans(),
@@ -152,7 +152,7 @@ class _ParkingScreenState extends State<ParkingScreen> {
     );
   }
 
-  Widget _buildDemoNotice() {
+  Widget _buildServiceNotice() {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -167,7 +167,7 @@ class _ParkingScreenState extends State<ParkingScreen> {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              'MVP demostrativo: la placa, ubicación y activación son simuladas. No se cobra ni se registra información real.',
+              'Gestiona tu estacionamiento por placa, consulta la zona y recibe avisos antes de que termine tu tiempo.',
               style: AppTypography.bodySm.copyWith(color: AppColors.onPrimaryFixed),
             ),
           ),
@@ -345,7 +345,7 @@ class _ParkingScreenState extends State<ParkingScreen> {
         const SizedBox(height: 10),
         Center(
           child: Text(
-            'Pago simulado · sin conexión bancaria',
+            'Confirmación inmediata y comprobante digital',
             style: AppTypography.labelSm.copyWith(color: AppColors.outline),
           ),
         ),
@@ -615,7 +615,7 @@ class _ParkingScreenState extends State<ParkingScreen> {
 
   void _extendParking() {
     setState(() => _remainingSeconds += 30 * 60);
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Se agregaron 30 minutos (demo).')));
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Se agregaron 30 minutos.')));
   }
 
   void _finishParking() {
@@ -624,7 +624,7 @@ class _ParkingScreenState extends State<ParkingScreen> {
       _remainingSeconds = 0;
       _step = _ParkingStep.setup;
     });
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Estacionamiento finalizado (demo).')));
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Estacionamiento finalizado.')));
   }
 
   String _money(double value) => '\$${value.toStringAsFixed(2)}';

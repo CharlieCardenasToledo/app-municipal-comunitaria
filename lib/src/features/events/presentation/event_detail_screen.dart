@@ -122,7 +122,7 @@ const _events = <String, _EventData>{
     category: 'Ambiente',
     date: 'Fecha por confirmar',
     location: 'Plaza Cívica de Zamora',
-    description: 'Actividad demostrativa para recuperar y cuidar los espacios públicos del cantón.',
+    description: 'Actividad para recuperar y cuidar los espacios públicos del cantón.',
     imageUrl: 'https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=1200&q=85',
     icon: Icons.eco_rounded,
   ),

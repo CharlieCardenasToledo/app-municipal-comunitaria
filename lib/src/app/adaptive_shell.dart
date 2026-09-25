@@ -33,8 +33,7 @@ enum ShellTab {
   marketplace('Comercio', Icons.storefront_rounded),
   incidents('Reportar', Icons.campaign_rounded),
   maps('Rutas', Icons.directions_bus_rounded),
-  events('Eventos', Icons.calendar_today_rounded),
-  payments('Pagos', Icons.account_balance_wallet_rounded);
+  events('Eventos', Icons.calendar_today_rounded);
 
   final String label;
   final IconData icon;
@@ -48,7 +47,6 @@ enum ShellTab {
       ShellTab.incidents => '/incidents',
       ShellTab.maps => '/maps',
       ShellTab.events => '/events',
-      ShellTab.payments => '/payments',
     };
   }
 

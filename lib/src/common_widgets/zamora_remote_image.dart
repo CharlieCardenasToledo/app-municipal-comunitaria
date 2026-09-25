@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Imágenes editoriales de fuentes libres con un fallback visual para la demo.
+/// Imágenes editoriales de fuentes libres con un fallback visual institucional.
 class ZamoraRemoteImage extends StatelessWidget {
   final String url;
   final double? height;

@@ -26,7 +26,7 @@ final class CartScreen extends StatelessWidget {
                 child: const Icon(Icons.bakery_dining_rounded, color: AppColors.onSecondaryContainer),
               ),
               title: Text('Canasta de productos locales', style: AppTypography.titleMd),
-              subtitle: const Text('1 unidad · entrega demostrativa'),
+              subtitle: const Text('1 unidad · entrega a domicilio'),
               trailing: Text('\$12.00', style: AppTypography.titleMd.copyWith(color: AppColors.primary)),
             ),
           ),

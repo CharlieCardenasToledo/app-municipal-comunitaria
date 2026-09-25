@@ -28,7 +28,7 @@ const _mapLocations = <_MapLocation>[
     id: 'parque-lineal',
     name: 'PARQUE LINEAL',
     title: 'Ruta de residuos',
-    detail: 'Seguimiento demostrativo del sector',
+    detail: 'Seguimiento del sector',
     status: 'Programada',
     layer: 'Residuos',
     point: LatLng(-4.0638, -78.9537),

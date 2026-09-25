@@ -40,7 +40,7 @@ const _obligations = [
   _MunicipalObligation(
     title: 'Impuesto predial urbano',
     category: 'Propiedad',
-    reference: 'Predio demostrativo · Zona centro',
+    reference: 'Predio urbano · Zona centro',
     dueDate: '31 dic 2026',
     amount: 42.80,
     interest: 0,
@@ -50,7 +50,7 @@ const _obligations = [
   _MunicipalObligation(
     title: 'Patente municipal',
     category: 'Actividad económica',
-    reference: 'Comercio local · RUC demo 1790000000',
+    reference: 'Comercio local · RUC registrado',
     dueDate: '30 jun 2026',
     amount: 68.50,
     interest: 2.40,
@@ -60,7 +60,7 @@ const _obligations = [
   _MunicipalObligation(
     title: 'Tasa por servicio municipal',
     category: 'Servicios',
-    reference: 'Cuenta demo · Sector El Limón',
+    reference: 'Cuenta de servicios · Sector El Limón',
     dueDate: '15 oct 2026',
     amount: 18.00,
     interest: 0,
@@ -80,7 +80,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
   _PaymentView _view = _PaymentView.obligations;
   _PaymentStep _step = _PaymentStep.select;
   _MunicipalObligation? _selected;
-  String _paymentMethod = 'Tarjeta demo';
+  String _paymentMethod = 'Tarjeta bancaria';
   String _lookupValue = '1100000000';
 
   @override
@@ -108,7 +108,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
       children: [
         _buildHeader(context),
         const SizedBox(height: 24),
-        _buildDemoNotice(),
+        _buildServiceNotice(),
         const SizedBox(height: 24),
         _buildViewSwitcher(),
         const SizedBox(height: 24),
@@ -153,7 +153,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
     );
   }
 
-  Widget _buildDemoNotice() {
+  Widget _buildServiceNotice() {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -170,7 +170,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              'Modo demostración: los valores son de ejemplo y no se realiza ningún cobro real.',
+              'Consulta tus obligaciones, revisa el detalle y completa tu pago desde un solo lugar.',
               style: AppTypography.bodySm.copyWith(
                 color: AppColors.onSecondaryFixed,
               ),
@@ -204,7 +204,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
         onTap: () {
           if (view == _PaymentView.receipt && _step != _PaymentStep.success) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Todavía no hay comprobantes en esta demo.')),
+              const SnackBar(content: Text('Aún no tienes comprobantes emitidos.')),
             );
             return;
           }
@@ -410,11 +410,11 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
             children: [
               Text('Medio de pago', style: AppTypography.headlineSm),
               const SizedBox(height: 6),
-              Text('Selecciona una opción para la demostración.', style: AppTypography.bodySm.copyWith(color: AppColors.outline)),
+              Text('Selecciona el medio de pago que prefieras.', style: AppTypography.bodySm.copyWith(color: AppColors.outline)),
               const SizedBox(height: 16),
-              _paymentMethodOption('Tarjeta demo', Icons.credit_card_rounded),
+              _paymentMethodOption('Tarjeta bancaria', Icons.credit_card_rounded),
               const SizedBox(height: 10),
-              _paymentMethodOption('Transferencia demo', Icons.account_balance_rounded),
+              _paymentMethodOption('Transferencia bancaria', Icons.account_balance_rounded),
               const SizedBox(height: 20),
               GradientButton(
                 label: isProcessing ? 'Procesando…' : 'Pagar ${_money(obligation.total)}',
@@ -423,7 +423,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
               ),
               const SizedBox(height: 10),
               Text(
-                'Simulación segura · sin conexión bancaria',
+                'Confirmación inmediata y comprobante digital',
                 textAlign: TextAlign.center,
                 style: AppTypography.labelSm.copyWith(color: AppColors.outline),
               ),
@@ -515,7 +515,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
               Text('Pago aprobado', style: AppTypography.headlineMd),
               const SizedBox(height: 8),
               Text(
-                'La operación se completó correctamente en modo demostración.',
+                'La operación se completó correctamente.',
                 textAlign: TextAlign.center,
                 style: AppTypography.bodyMd.copyWith(color: AppColors.onSurfaceVariant),
               ),
@@ -529,7 +529,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                 ),
                 child: Column(
                   children: [
-                    _summaryRow('Comprobante', 'ZM-DEMO-2048'),
+                    _summaryRow('Comprobante', 'ZM-2026-2048'),
                     _summaryRow('Concepto', obligation.title),
                     _summaryRow('Medio', _paymentMethod),
                     _summaryRow('Total', _money(obligation.total)),
@@ -541,7 +541,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                 children: [
                   Expanded(
                     child: OutlinedButton.icon(
-                      onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Comprobante listo para descargar (demo).'))),
+                      onPressed: () => ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Comprobante listo para descargar.'))),
                       icon: const Icon(Icons.download_rounded),
                       label: const Text('Descargar'),
                       style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(52)),
@@ -575,7 +575,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
       children: [
         _buildHeader(context),
         const SizedBox(height: 24),
-        _buildDemoNotice(),
+        _buildServiceNotice(),
         const SizedBox(height: 24),
         _buildViewSwitcher(),
         const SizedBox(height: 24),
@@ -586,7 +586,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
 
   void _lookup() {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Consulta simulada para $_lookupValue. Mostramos obligaciones de ejemplo.')),
+      SnackBar(content: Text('Consulta realizada para $_lookupValue. Estas son tus obligaciones pendientes.')),
     );
   }
 

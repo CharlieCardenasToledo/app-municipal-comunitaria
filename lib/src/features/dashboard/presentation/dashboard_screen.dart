@@ -28,9 +28,7 @@ final class DashboardScreen extends ConsumerWidget {
               const SizedBox(height: 28),
               _buildQuickAccessGrid(context),
               const SizedBox(height: 20),
-              _buildPaymentsShortcut(context),
-              const SizedBox(height: 16),
-              _buildParkingShortcut(context),
+              _buildMunicipalServicesCard(context),
               const SizedBox(height: 32),
               _buildNewsSection(context),
               const SizedBox(height: 32),
@@ -42,86 +40,90 @@ final class DashboardScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildPaymentsShortcut(BuildContext context) {
+  Widget _buildMunicipalServicesCard(BuildContext context) {
     return TonalCard(
-      onTap: () => context.go('/payments'),
       padding: const EdgeInsets.all(20),
-      color: AppColors.primaryFixed.withValues(alpha: 0.55),
-      child: Row(
+      color: AppColors.primaryFixed.withValues(alpha: 0.34),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: 52,
-            height: 52,
-            decoration: BoxDecoration(
-              color: AppColors.primary,
-              borderRadius: AppBorderRadius.radiusLg,
-            ),
-            child: const Icon(
-              Icons.account_balance_wallet_rounded,
-              color: AppColors.onPrimary,
-              size: 26,
-            ),
+          Text('Servicios municipales', style: AppTypography.titleMd),
+          const SizedBox(height: 4),
+          Text(
+            'Gestiona tus obligaciones y tu estacionamiento desde un mismo lugar.',
+            style: AppTypography.bodySm.copyWith(color: AppColors.onSurfaceVariant),
           ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Pagos municipales', style: AppTypography.titleMd),
-                const SizedBox(height: 3),
-                Text(
-                  'Consulta tus obligaciones y genera un comprobante demo.',
-                  style: AppTypography.bodySm.copyWith(
-                    color: AppColors.onSurfaceVariant,
-                  ),
+          const SizedBox(height: 16),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final compact = constraints.maxWidth < 520;
+              final actions = [
+                _serviceAction(
+                  context,
+                  icon: Icons.account_balance_wallet_rounded,
+                  title: 'Pagos municipales',
+                  subtitle: 'Obligaciones y comprobantes',
+                  color: AppColors.primary,
+                  onTap: () => context.push('/payments'),
                 ),
-              ],
-            ),
+                _serviceAction(
+                  context,
+                  icon: Icons.local_parking_rounded,
+                  title: 'Estacionamiento',
+                  subtitle: 'Activa y consulta tu tiempo',
+                  color: AppColors.secondary,
+                  onTap: () => context.push('/parking'),
+                ),
+              ];
+              return compact
+                  ? Column(children: [actions[0], const SizedBox(height: 10), actions[1]])
+                  : Row(children: [Expanded(child: actions[0]), const SizedBox(width: 10), Expanded(child: actions[1])]);
+            },
           ),
-          const Icon(Icons.arrow_forward_rounded, color: AppColors.primary),
         ],
       ),
     );
   }
 
-  Widget _buildParkingShortcut(BuildContext context) {
-    return TonalCard(
-      onTap: () => context.push('/parking'),
-      padding: const EdgeInsets.all(20),
-      color: AppColors.secondaryContainer.withValues(alpha: 0.35),
-      child: Row(
-        children: [
-          Container(
-            width: 52,
-            height: 52,
-            decoration: BoxDecoration(
-              color: AppColors.secondary,
-              borderRadius: AppBorderRadius.radiusLg,
-            ),
-            child: const Icon(
-              Icons.local_parking_rounded,
-              color: AppColors.onSecondary,
-              size: 26,
-            ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Estacionamiento tarifado', style: AppTypography.titleMd),
-                const SizedBox(height: 3),
-                Text(
-                  'Activa tu tiempo de parqueo por placa y evita usar tarjetas físicas.',
-                  style: AppTypography.bodySm.copyWith(
-                    color: AppColors.onSurfaceVariant,
-                  ),
+  Widget _serviceAction(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String subtitle,
+    required Color color,
+    required VoidCallback onTap,
+  }) {
+    return Material(
+      color: AppColors.surfaceContainerLowest.withValues(alpha: 0.72),
+      borderRadius: AppBorderRadius.radiusLg,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: AppBorderRadius.radiusLg,
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Row(
+            children: [
+              Container(
+                width: 42,
+                height: 42,
+                decoration: BoxDecoration(color: color, borderRadius: AppBorderRadius.radiusMd),
+                child: Icon(icon, color: color == AppColors.primary ? AppColors.onPrimary : AppColors.onSecondary, size: 21),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(title, style: AppTypography.labelLg),
+                    const SizedBox(height: 3),
+                    Text(subtitle, style: AppTypography.labelSm.copyWith(color: AppColors.outline)),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              Icon(Icons.arrow_forward_rounded, color: color, size: 19),
+            ],
           ),
-          const Icon(Icons.arrow_forward_rounded, color: AppColors.secondary),
-        ],
+        ),
       ),
     );
   }
