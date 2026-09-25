@@ -29,6 +29,8 @@ final class DashboardScreen extends ConsumerWidget {
               _buildQuickAccessGrid(context),
               const SizedBox(height: 20),
               _buildPaymentsShortcut(context),
+              const SizedBox(height: 16),
+              _buildParkingShortcut(context),
               const SizedBox(height: 32),
               _buildNewsSection(context),
               const SizedBox(height: 32),
@@ -77,6 +79,48 @@ final class DashboardScreen extends ConsumerWidget {
             ),
           ),
           const Icon(Icons.arrow_forward_rounded, color: AppColors.primary),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildParkingShortcut(BuildContext context) {
+    return TonalCard(
+      onTap: () => context.push('/parking'),
+      padding: const EdgeInsets.all(20),
+      color: AppColors.secondaryContainer.withValues(alpha: 0.35),
+      child: Row(
+        children: [
+          Container(
+            width: 52,
+            height: 52,
+            decoration: BoxDecoration(
+              color: AppColors.secondary,
+              borderRadius: AppBorderRadius.radiusLg,
+            ),
+            child: const Icon(
+              Icons.local_parking_rounded,
+              color: AppColors.onSecondary,
+              size: 26,
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Estacionamiento tarifado', style: AppTypography.titleMd),
+                const SizedBox(height: 3),
+                Text(
+                  'Activa tu tiempo de parqueo por placa y evita usar tarjetas físicas.',
+                  style: AppTypography.bodySm.copyWith(
+                    color: AppColors.onSurfaceVariant,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Icon(Icons.arrow_forward_rounded, color: AppColors.secondary),
         ],
       ),
     );

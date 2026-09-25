@@ -13,6 +13,7 @@ import '../features/orders/presentation/order_confirmed_screen.dart';
 import '../features/schedules/presentation/schedule_screen.dart';
 import '../features/settings/presentation/proximity_alert_screen.dart';
 import '../features/payments/presentation/payments_screen.dart';
+import '../features/parking/presentation/parking_screen.dart';
 import '../features/marketplace/presentation/business_detail_screen.dart';
 import '../features/events/presentation/event_detail_screen.dart';
 import 'adaptive_shell.dart';
@@ -117,6 +118,11 @@ GoRouter _createRouter() {
         path: '/alert-settings',
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) => const ProximityAlertScreen(),
+      ),
+      GoRoute(
+        path: '/parking',
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => const ParkingScreen(),
       ),
     ],
   );
