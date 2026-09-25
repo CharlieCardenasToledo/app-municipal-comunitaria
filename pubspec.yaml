@@ -26,6 +26,7 @@ dependencies:
 
   # Networking
   dio: ^5.7.0
+  url_launcher: ^6.3.1
 
   # Responsive
   responsive_framework: ^1.5.1

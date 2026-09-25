@@ -321,6 +321,11 @@ class _DesktopShell extends StatelessWidget {
                       ),
                     ),
                   ),
+                  TextButton.icon(
+                    onPressed: () => context.go('/about'),
+                    icon: const ClayIcon(asset: ClayAssets.avatar, size: 24),
+                    label: const Text('Acerca de Mi Zamora'),
+                  ),
                   const SizedBox(height: 16),
                 ],
               ),

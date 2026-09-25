@@ -35,6 +35,8 @@ final class DashboardScreen extends ConsumerWidget {
               _buildNewsSection(context),
               const SizedBox(height: 32),
               _buildWeatherCard(context),
+              const SizedBox(height: 18),
+              _buildAboutLink(context),
             ],
           ),
         ),
@@ -142,15 +144,18 @@ final class DashboardScreen extends ConsumerWidget {
   Widget _buildAppBar(BuildContext context) {
     return Row(
       children: [
-        Container(
-          width: 42,
-          height: 42,
-          decoration: BoxDecoration(
-            color: AppColors.surfaceContainerHigh,
-            borderRadius: AppBorderRadius.radiusFull,
-            border: Border.all(color: AppColors.primaryFixedDim, width: 2),
+        GestureDetector(
+          onTap: () => context.push('/about'),
+          child: Container(
+            width: 42,
+            height: 42,
+            decoration: BoxDecoration(
+              color: AppColors.surfaceContainerHigh,
+              borderRadius: AppBorderRadius.radiusFull,
+              border: Border.all(color: AppColors.primaryFixedDim, width: 2),
+            ),
+            child: const ClayIcon(asset: ClayAssets.avatar, size: 32),
           ),
-          child: const ClayIcon(asset: ClayAssets.avatar, size: 32),
         ),
         const SizedBox(width: 12),
         Column(
@@ -428,6 +433,31 @@ final class DashboardScreen extends ConsumerWidget {
               ),
             ],
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAboutLink(BuildContext context) {
+    return TonalCard(
+      onTap: () => context.push('/about'),
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+      color: AppColors.surfaceContainerLowest.withValues(alpha: 0.78),
+      child: Row(
+        children: [
+          const ClayIcon(asset: ClayAssets.avatar, size: 42),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Acerca de Mi Zamora', style: AppTypography.labelLg),
+                const SizedBox(height: 3),
+                Text('Conoce a Nekatek Lab', style: AppTypography.labelSm.copyWith(color: AppColors.outline)),
+              ],
+            ),
+          ),
+          const Icon(Icons.chevron_right_rounded, color: AppColors.outline),
         ],
       ),
     );

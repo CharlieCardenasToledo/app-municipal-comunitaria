@@ -80,7 +80,11 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
   _PaymentView _view = _PaymentView.obligations;
   _PaymentStep _step = _PaymentStep.select;
   _MunicipalObligation? _selected;
-  String _paymentMethod = 'Tarjeta bancaria';
+  _MunicipalObligation? _paidObligation;
+  String _paymentMethod = 'De Una';
+  String _paidMethod = '';
+  String _invoiceEmail = 'vecina@zamora.ec';
+  String _paidEmail = '';
   String _lookupValue = '1100000000';
 
   @override
@@ -202,9 +206,9 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
     return Expanded(
       child: GestureDetector(
         onTap: () {
-          if (view == _PaymentView.receipt && _step != _PaymentStep.success) {
+          if (view == _PaymentView.receipt && _paidObligation == null) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Aún no tienes comprobantes emitidos.')),
+              const SnackBar(content: Text('Completa un pago para habilitar tus comprobantes.')),
             );
             return;
           }
@@ -412,18 +416,38 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
               const SizedBox(height: 6),
               Text('Selecciona el medio de pago que prefieras.', style: AppTypography.bodySm.copyWith(color: AppColors.outline)),
               const SizedBox(height: 16),
-              _paymentMethodOption('Tarjeta bancaria', Icons.credit_card_rounded),
+              _paymentMethodOption(
+                'De Una',
+                'Link de pago con De Una',
+                Icons.link_rounded,
+              ),
               const SizedBox(height: 10),
-              _paymentMethodOption('Transferencia bancaria', Icons.account_balance_rounded),
+              _paymentMethodOption(
+                'Ahorita',
+                'Link de pago con Ahorita',
+                Icons.link_rounded,
+              ),
+              const SizedBox(height: 18),
+              Text('Correo para la factura', style: AppTypography.labelLg),
+              const SizedBox(height: 6),
+              TextFormField(
+                initialValue: _invoiceEmail,
+                keyboardType: TextInputType.emailAddress,
+                onChanged: (value) => _invoiceEmail = value,
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.email_outlined),
+                  hintText: 'tu-correo@ejemplo.com',
+                ),
+              ),
               const SizedBox(height: 20),
               GradientButton(
-                label: isProcessing ? 'Procesando…' : 'Pagar ${_money(obligation.total)}',
-                icon: isProcessing ? const SizedBox.square(dimension: 16, child: CircularProgressIndicator(strokeWidth: 2, color: AppColors.onPrimary)) : const Icon(Icons.lock_rounded, size: 17),
+                label: isProcessing ? 'Generando enlace…' : 'Continuar con $_paymentMethod',
+                icon: isProcessing ? const SizedBox.square(dimension: 16, child: CircularProgressIndicator(strokeWidth: 2, color: AppColors.onPrimary)) : const Icon(Icons.open_in_new_rounded, size: 17),
                 onPressed: isProcessing ? null : _simulatePayment,
               ),
               const SizedBox(height: 10),
               Text(
-                'Confirmación inmediata y comprobante digital',
+                'Se abrirá el enlace de pago y recibirás tu factura por correo.',
                 textAlign: TextAlign.center,
                 style: AppTypography.labelSm.copyWith(color: AppColors.outline),
               ),
@@ -459,7 +483,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
     );
   }
 
-  Widget _paymentMethodOption(String label, IconData icon) {
+  Widget _paymentMethodOption(String label, String subtitle, IconData icon) {
     final selected = _paymentMethod == label;
     return GestureDetector(
       onTap: () => setState(() => _paymentMethod = label),
@@ -474,7 +498,16 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
           children: [
             Icon(icon, color: selected ? AppColors.primary : AppColors.outline),
             const SizedBox(width: 12),
-            Expanded(child: Text(label, style: AppTypography.titleSm)),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(label, style: AppTypography.titleSm),
+                  const SizedBox(height: 2),
+                  Text(subtitle, style: AppTypography.labelSm.copyWith(color: AppColors.outline)),
+                ],
+              ),
+            ),
             Icon(selected ? Icons.radio_button_checked : Icons.radio_button_off, color: selected ? AppColors.primary : AppColors.outline),
           ],
         ),
@@ -497,7 +530,9 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
   }
 
   Widget _buildSuccessCard() {
-    final obligation = _selected!;
+    final obligation = _paidObligation ?? _selected!;
+    final paidMethod = _paidMethod.isEmpty ? _paymentMethod : _paidMethod;
+    final paidEmail = _paidEmail.isEmpty ? _invoiceEmail : _paidEmail;
     return Center(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 620),
@@ -515,7 +550,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
               Text('Pago aprobado', style: AppTypography.headlineMd),
               const SizedBox(height: 8),
               Text(
-                'La operación se completó correctamente.',
+                'La operación se completó correctamente. La factura fue enviada a $paidEmail.',
                 textAlign: TextAlign.center,
                 style: AppTypography.bodyMd.copyWith(color: AppColors.onSurfaceVariant),
               ),
@@ -531,8 +566,9 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                   children: [
                     _summaryRow('Comprobante', 'ZM-2026-2048'),
                     _summaryRow('Concepto', obligation.title),
-                    _summaryRow('Medio', _paymentMethod),
+                    _summaryRow('Medio', paidMethod),
                     _summaryRow('Total', _money(obligation.total)),
+                    _summaryRow('Factura', 'Enviada a $paidEmail'),
                   ],
                 ),
               ),
@@ -594,7 +630,12 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
     setState(() => _step = _PaymentStep.processing);
     await Future<void>.delayed(const Duration(milliseconds: 900));
     if (!mounted) return;
-    setState(() => _step = _PaymentStep.success);
+    setState(() {
+      _paidObligation = _selected;
+      _paidMethod = _paymentMethod;
+      _paidEmail = _invoiceEmail;
+      _step = _PaymentStep.success;
+    });
   }
 
   String _money(double value) => '\$${value.toStringAsFixed(2)}';

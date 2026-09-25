@@ -14,6 +14,7 @@ import '../features/schedules/presentation/schedule_screen.dart';
 import '../features/settings/presentation/proximity_alert_screen.dart';
 import '../features/payments/presentation/payments_screen.dart';
 import '../features/parking/presentation/parking_screen.dart';
+import '../features/about/presentation/about_screen.dart';
 import '../features/marketplace/presentation/business_detail_screen.dart';
 import '../features/events/presentation/event_detail_screen.dart';
 import 'adaptive_shell.dart';
@@ -122,6 +123,11 @@ GoRouter _createRouter() {
         path: '/payments',
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) => const PaymentsScreen(),
+      ),
+      GoRoute(
+        path: '/about',
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => const AboutScreen(),
       ),
     ],
   );
