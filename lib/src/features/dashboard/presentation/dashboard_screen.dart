@@ -401,30 +401,165 @@ final class DashboardScreen extends ConsumerWidget {
           ),
           Column(
             children: [
-              const Icon(
-                Icons.light_mode_rounded,
-                color: AppColors.onPrimary,
-                size: 48,
-              ),
+              const ClayIcon(asset: ClayAssets.rain, size: 72),
               const SizedBox(height: 8),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                decoration: BoxDecoration(
+              Material(
+                color: Colors.transparent,
+                borderRadius: AppBorderRadius.radiusFull,
+                child: InkWell(
+                  onTap: () => _showWeatherServices(context),
                   borderRadius: AppBorderRadius.radiusFull,
-                  border: Border.all(
-                    color: AppColors.onPrimary.withValues(alpha: 0.3),
-                  ),
-                ),
-                child: Text(
-                  'Ver servicios',
-                  style: AppTypography.buttonText.copyWith(
-                    color: AppColors.onPrimary,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    decoration: BoxDecoration(
+                      borderRadius: AppBorderRadius.radiusFull,
+                      border: Border.all(
+                        color: AppColors.onPrimary.withValues(alpha: 0.3),
+                      ),
+                    ),
+                    child: Text(
+                      'Ver servicios',
+                      style: AppTypography.buttonText.copyWith(
+                        color: AppColors.onPrimary,
+                      ),
+                    ),
                   ),
                 ),
               ),
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  void _showWeatherServices(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (sheetContext) {
+        return SafeArea(
+          child: Container(
+            padding: const EdgeInsets.fromLTRB(24, 12, 24, 24),
+            decoration: const BoxDecoration(
+              color: AppColors.surface,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Container(
+                    width: 42,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: AppColors.outlineVariant,
+                      borderRadius: AppBorderRadius.radiusFull,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    const ClayIcon(asset: ClayAssets.rain, size: 56),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Servicios para un día de lluvia', style: AppTypography.titleLg),
+                          const SizedBox(height: 4),
+                          Text(
+                            'Planifica tus recorridos y gestiones en Zamora con más tranquilidad.',
+                            style: AppTypography.bodySm.copyWith(color: AppColors.onSurfaceVariant),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                _WeatherServiceTile(
+                  asset: ClayAssets.routes,
+                  title: 'Revisa tus rutas',
+                  subtitle: 'Consulta el recorrido y la llegada del recolector.',
+                  onTap: () {
+                    Navigator.of(sheetContext).pop();
+                    context.go('/maps');
+                  },
+                ),
+                const SizedBox(height: 10),
+                _WeatherServiceTile(
+                  asset: ClayAssets.alerts,
+                  title: 'Horarios y alertas',
+                  subtitle: 'Mira los avisos municipales antes de salir.',
+                  onTap: () {
+                    Navigator.of(sheetContext).pop();
+                    context.go('/schedules');
+                  },
+                ),
+                const SizedBox(height: 10),
+                _WeatherServiceTile(
+                  asset: ClayAssets.report,
+                  title: 'Reporta una incidencia',
+                  subtitle: 'Comunica novedades en vías, alumbrado o residuos.',
+                  onTap: () {
+                    Navigator.of(sheetContext).pop();
+                    context.go('/incidents');
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _WeatherServiceTile extends StatelessWidget {
+  final String asset;
+  final String title;
+  final String subtitle;
+  final VoidCallback onTap;
+
+  const _WeatherServiceTile({
+    required this.asset,
+    required this.title,
+    required this.subtitle,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: AppColors.surfaceContainerHigh,
+      borderRadius: AppBorderRadius.radiusLg,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: AppBorderRadius.radiusLg,
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Row(
+            children: [
+              ClayIcon(asset: asset, size: 42),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(title, style: AppTypography.labelLg),
+                    const SizedBox(height: 3),
+                    Text(subtitle, style: AppTypography.labelSm.copyWith(color: AppColors.outline)),
+                  ],
+                ),
+              ),
+              const Icon(Icons.chevron_right_rounded, color: AppColors.outline),
+            ],
+          ),
+        ),
       ),
     );
   }

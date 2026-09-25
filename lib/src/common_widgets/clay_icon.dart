@@ -37,6 +37,7 @@ class ClayIcon extends StatelessWidget {
 abstract final class ClayAssets {
   static const avatar = 'assets/images/amazonia-avatar-clay.png';
   static const alerts = 'assets/images/amazonia-alertas-clay.png';
+  static const rain = 'assets/images/amazonia-lluvia-clay.png';
   static const commerce = 'assets/images/amazonia-comercio-clay.png';
   static const events = 'assets/images/amazonia-eventos-clay.png';
   static const parking = 'assets/images/amazonia-estacionamiento-clay.png';
