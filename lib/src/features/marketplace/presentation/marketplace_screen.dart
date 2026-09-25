@@ -8,6 +8,7 @@ import '../../../common_widgets/search_bar_widget.dart';
 import '../../../common_widgets/gradient_button.dart';
 import '../../../common_widgets/glass_chip.dart';
 import '../../../common_widgets/zamora_remote_image.dart';
+import '../../../common_widgets/clay_icon.dart';
 
 final class MarketplaceScreen extends ConsumerWidget {
   const MarketplaceScreen({super.key});
@@ -26,7 +27,7 @@ final class MarketplaceScreen extends ConsumerWidget {
         Text('Comercio de Zamora', style: AppTypography.displayMd),
               const SizedBox(height: 8),
               Text(
-          'Encuentra productos, ferias y emprendimientos del cantón Zamora.',
+          'Elige lo nuestro: productos, ferias y emprendimientos del cantón Zamora.',
                 style: AppTypography.bodyMd.copyWith(
                   color: AppColors.onSurfaceVariant,
                 ),
@@ -53,20 +54,23 @@ final class MarketplaceScreen extends ConsumerWidget {
             borderRadius: AppBorderRadius.radiusFull,
             border: Border.all(color: AppColors.primaryContainer, width: 2),
           ),
-          child: ClipRRect(
-            borderRadius: AppBorderRadius.radiusFull,
-            child: Container(
-              color: AppColors.primaryFixed,
-              child: const Icon(Icons.person_rounded, color: AppColors.primary),
-            ),
+          child: Container(
+            color: AppColors.primaryFixed,
+            child: const ClayIcon(asset: ClayAssets.avatar, size: 32),
           ),
         ),
         const SizedBox(width: 12),
-        Text('Zamora Conecta', style: AppTypography.titleLg.copyWith(color: AppColors.primary)),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Mi Zamora', style: AppTypography.titleLg.copyWith(color: AppColors.primary)),
+            Text('Tierra de aves y cascadas', style: AppTypography.labelSm.copyWith(color: AppColors.outline)),
+          ],
+        ),
         const Spacer(),
         IconButton(
           onPressed: () => context.push('/schedules'),
-          icon: const Icon(Icons.notifications_outlined),
+          icon: const ClayIcon(asset: ClayAssets.alerts, size: 26),
           color: AppColors.primary,
         ),
       ],
@@ -75,10 +79,10 @@ final class MarketplaceScreen extends ConsumerWidget {
 
   Widget _buildCategories(BuildContext context) {
     final categories = [
-      ('Productos locales', Icons.shopping_basket_rounded),
-      ('Feria libre', Icons.storefront_rounded),
-      ('Artesanías', Icons.palette_rounded),
-      ('Servicios', Icons.more_horiz_rounded),
+      ('Productos locales', ClayAssets.commerce),
+      ('Feria libre', ClayAssets.commerce),
+      ('Artesanías', ClayAssets.events),
+      ('Servicios', ClayAssets.avatar),
     ];
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -96,7 +100,7 @@ final class MarketplaceScreen extends ConsumerWidget {
               ),
               child: Row(
                 children: [
-                  Icon(c.$2, size: 18, color: c.$1 == 'Productos locales' ? AppColors.onSecondaryContainer : AppColors.onSurface),
+                  ClayIcon(asset: c.$2, size: 24),
                   const SizedBox(width: 8),
                   Text(c.$1, style: AppTypography.labelMd.copyWith(
                     color: c.$1 == 'Productos locales' ? AppColors.onSecondaryContainer : AppColors.onSurface,

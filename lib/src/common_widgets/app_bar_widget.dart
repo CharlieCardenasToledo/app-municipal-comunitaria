@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../core/theme/app_colors.dart';
+import 'clay_icon.dart';
 
 /// Reusable app bar with frosted glass effect.
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
@@ -53,10 +54,10 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               ),
               const Spacer(),
               ...?actions,
-              if (showNotification)
+                if (showNotification)
                 IconButton(
                    onPressed: () => context.push('/schedules'),
-                  icon: const Icon(Icons.notifications_outlined),
+                  icon: const ClayIcon(asset: ClayAssets.alerts, size: 26),
                   color: AppColors.primary,
                 ),
             ],

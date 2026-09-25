@@ -7,6 +7,8 @@ import '../../../core/theme/app_border_radius.dart';
 import '../../../common_widgets/glass_chip.dart';
 import '../../../common_widgets/tonal_card.dart';
 import '../../../common_widgets/zamora_remote_image.dart';
+import '../../../common_widgets/amazonian_backdrop.dart';
+import '../../../common_widgets/clay_icon.dart';
 
 final class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
@@ -61,6 +63,7 @@ final class DashboardScreen extends ConsumerWidget {
                 _serviceAction(
                   context,
                   icon: Icons.account_balance_wallet_rounded,
+                  asset: 'assets/images/amazonia-pagos-clay.png',
                   title: 'Pagos municipales',
                   subtitle: 'Obligaciones y comprobantes',
                   color: AppColors.primary,
@@ -69,6 +72,7 @@ final class DashboardScreen extends ConsumerWidget {
                 _serviceAction(
                   context,
                   icon: Icons.local_parking_rounded,
+                  asset: 'assets/images/amazonia-estacionamiento-clay.png',
                   title: 'Estacionamiento',
                   subtitle: 'Activa y consulta tu tiempo',
                   color: AppColors.secondary,
@@ -88,6 +92,7 @@ final class DashboardScreen extends ConsumerWidget {
   Widget _serviceAction(
     BuildContext context, {
     required IconData icon,
+    String? asset,
     required String title,
     required String subtitle,
     required Color color,
@@ -107,7 +112,12 @@ final class DashboardScreen extends ConsumerWidget {
                 width: 42,
                 height: 42,
                 decoration: BoxDecoration(color: color, borderRadius: AppBorderRadius.radiusMd),
-                child: Icon(icon, color: color == AppColors.primary ? AppColors.onPrimary : AppColors.onSecondary, size: 21),
+                child: asset == null
+                    ? Icon(icon, color: color == AppColors.primary ? AppColors.onPrimary : AppColors.onSecondary, size: 21)
+                    : Padding(
+                        padding: const EdgeInsets.all(4),
+                        child: Image.asset(asset, fit: BoxFit.contain),
+                      ),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -133,31 +143,27 @@ final class DashboardScreen extends ConsumerWidget {
     return Row(
       children: [
         Container(
-          width: 40,
-          height: 40,
+          width: 42,
+          height: 42,
           decoration: BoxDecoration(
+            color: AppColors.surfaceContainerHigh,
             borderRadius: AppBorderRadius.radiusFull,
             border: Border.all(color: AppColors.primaryFixedDim, width: 2),
           ),
-          child: ClipRRect(
-            borderRadius: AppBorderRadius.radiusFull,
-            child: Container(
-              color: AppColors.surfaceContainerHigh,
-              child: const Icon(Icons.person_rounded, color: AppColors.primary),
-            ),
-          ),
+          child: const ClayIcon(asset: ClayAssets.avatar, size: 32),
         ),
         const SizedBox(width: 12),
-        Text(
-          'Zamora Conecta',
-          style: AppTypography.titleLg.copyWith(
-            color: AppColors.primary,
-          ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Mi Zamora', style: AppTypography.titleLg.copyWith(color: AppColors.primary)),
+            Text('Tierra de aves y cascadas', style: AppTypography.labelSm.copyWith(color: AppColors.outline)),
+          ],
         ),
         const Spacer(),
         IconButton(
           onPressed: () => context.push('/schedules'),
-          icon: const Icon(Icons.notifications_outlined),
+          icon: const ClayIcon(asset: ClayAssets.alerts, size: 26),
           color: AppColors.primary,
         ),
       ],
@@ -166,28 +172,34 @@ final class DashboardScreen extends ConsumerWidget {
 
   // ─── Welcome Section ──────────────────────────────────────
   Widget _buildWelcomeSection(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'DASHBOARD CIUDADANO',
-          style: AppTypography.labelSm.copyWith(
-            color: AppColors.primary,
-          ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          'Hola, vecina/o',
-          style: AppTypography.displayMd,
-        ),
-        const SizedBox(height: 4),
-        Text(
-          'Consulta servicios, actividades y novedades de tu cantón.',
-          style: AppTypography.bodyMd.copyWith(
-            color: AppColors.onSurfaceVariant,
-          ),
-        ),
-      ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final showBird = constraints.maxWidth > 420;
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('TIERRA DE AVES Y CASCADAS', style: AppTypography.labelSm.copyWith(color: AppColors.primary)),
+                  const SizedBox(height: 4),
+                  Text('Hola, vecina/o', style: AppTypography.displayMd),
+                  const SizedBox(height: 4),
+                  Text('Servicios, naturaleza y comunidad en un mismo lugar.', style: AppTypography.bodyMd.copyWith(color: AppColors.onSurfaceVariant)),
+                ],
+              ),
+            ),
+            if (showBird) ...[
+              const SizedBox(width: 8),
+              const AmazonianBird(
+                asset: 'assets/images/amazonia-tucan-clay.png',
+                width: 142,
+              ),
+            ],
+          ],
+        );
+      },
     );
   }
 
@@ -246,10 +258,10 @@ final class DashboardScreen extends ConsumerWidget {
   // ─── Quick Access Bento Grid ─────────────────────────────
   Widget _buildQuickAccessGrid(BuildContext context) {
     final items = [
-      ('Reportar\nIncidente', Icons.campaign_rounded, AppColors.primary, '/incidents'),
-      ('Marketplace', Icons.storefront_rounded, AppColors.secondary, '/marketplace'),
-      ('Rutas de\nresiduos', Icons.delete_rounded, AppColors.tertiary, '/maps'),
-      ('Eventos', Icons.calendar_today_rounded, AppColors.primaryContainer, '/events'),
+      ('Reportar\nIncidente', Icons.campaign_rounded, AppColors.primary, '/incidents', ClayAssets.report),
+      ('Marketplace', Icons.storefront_rounded, AppColors.secondary, '/marketplace', ClayAssets.commerce),
+      ('Rutas de\nresiduos', Icons.delete_rounded, AppColors.tertiary, '/maps', ClayAssets.routes),
+      ('Eventos', Icons.calendar_today_rounded, AppColors.primaryContainer, '/events', ClayAssets.events),
     ];
 
     return GridView.builder(
@@ -263,11 +275,12 @@ final class DashboardScreen extends ConsumerWidget {
       ),
       itemCount: items.length,
       itemBuilder: (context, index) {
-        final (label, icon, color, path) = items[index];
+        final (label, icon, color, path, asset) = items[index];
         return _QuickAccessTile(
           label: label,
           icon: icon,
           color: color,
+          asset: asset,
           onTap: () => context.go(path),
         );
       },
@@ -422,12 +435,14 @@ class _QuickAccessTile extends StatelessWidget {
   final String label;
   final IconData icon;
   final Color color;
+  final String? asset;
   final VoidCallback onTap;
 
   const _QuickAccessTile({
     required this.label,
     required this.icon,
     required this.color,
+    this.asset,
     required this.onTap,
   });
 
@@ -446,7 +461,12 @@ class _QuickAccessTile extends StatelessWidget {
               color: color.withValues(alpha: 0.1),
               borderRadius: AppBorderRadius.radiusFull,
             ),
-            child: Icon(icon, color: color, size: 28),
+            child: asset == null
+                ? Icon(icon, color: color, size: 28)
+                : Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: Image.asset(asset!, fit: BoxFit.contain),
+                  ),
           ),
           const SizedBox(height: 12),
           Text(

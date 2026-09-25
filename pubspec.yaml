@@ -1,5 +1,5 @@
 name: civic_horizon
-description: "Zamora Conecta - Servicios y participación ciudadana del GAD Municipal de Zamora"
+description: "Mi Zamora - Servicios y participación ciudadana del GAD Municipal de Zamora"
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -68,3 +68,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/

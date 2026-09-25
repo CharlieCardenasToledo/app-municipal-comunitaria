@@ -1,11 +1,11 @@
 {
-    "name": "Zamora Conecta",
-    "short_name": "Zamora",
+    "name": "Mi Zamora",
+    "short_name": "Mi Zamora",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "Servicios, participación y vida comunitaria del GAD Municipal de Zamora.",
+    "background_color": "#F7F6EF",
+    "theme_color": "#0B5B4F",
+    "description": "Servicios, participación y vida comunitaria en la Tierra de Aves y Cascadas.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'src/app/router.dart';
+import 'src/common_widgets/amazonian_backdrop.dart';
 import 'src/core/theme/app_theme.dart';
 
 void main() {
@@ -18,10 +19,13 @@ class CivicHorizonApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Zamora Conecta',
+      title: 'Mi Zamora',
       debugShowCheckedModeBanner: false,
       theme: buildLightTheme(),
       routerConfig: appRouter,
+      builder: (context, child) => AmazonianBackdrop(
+        child: child ?? const SizedBox.shrink(),
+      ),
     );
   }
 }

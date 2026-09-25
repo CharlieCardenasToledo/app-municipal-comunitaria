@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../core/theme/app_colors.dart';
 import '../core/theme/app_typography.dart';
+import '../common_widgets/clay_icon.dart';
 
 /// Adaptive shell that switches between mobile bottom nav, tablet navigation
 /// rail, and desktop sidebar based on screen width.
@@ -27,18 +28,35 @@ class AdaptiveShell extends StatelessWidget {
   }
 }
 
+class _ShellIcon extends StatelessWidget {
+  final ShellTab tab;
+  final double size;
+
+  const _ShellIcon({required this.tab, required this.size});
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      label: tab.label,
+      image: true,
+      child: ClayIcon(asset: tab.asset, size: size),
+    );
+  }
+}
+
 // ─── Breakpoints ──────────────────────────────────────────────
 enum ShellTab {
-  dashboard('Inicio', Icons.dashboard_rounded),
-  marketplace('Comercio', Icons.storefront_rounded),
-  incidents('Reportar', Icons.campaign_rounded),
-  maps('Rutas', Icons.directions_bus_rounded),
-  events('Eventos', Icons.calendar_today_rounded);
+  dashboard('Inicio', Icons.dashboard_rounded, ClayAssets.hummingbird),
+  marketplace('Comercio', Icons.storefront_rounded, ClayAssets.commerce),
+  incidents('Reportar', Icons.campaign_rounded, ClayAssets.report),
+  maps('Rutas', Icons.directions_bus_rounded, ClayAssets.routes),
+  events('Eventos', Icons.calendar_today_rounded, ClayAssets.events);
 
   final String label;
   final IconData icon;
+  final String asset;
 
-  const ShellTab(this.label, this.icon);
+  const ShellTab(this.label, this.icon, this.asset);
 
   String get path {
     return switch (this) {
@@ -120,13 +138,7 @@ class _MobileShell extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(
-                          tab.icon,
-                          size: 24,
-                          color: selected
-                              ? AppColors.primary
-                              : AppColors.outline,
-                        ),
+                        _ShellIcon(tab: tab, size: 27),
                         const SizedBox(height: 4),
                         Text(
                           tab.label,
@@ -171,8 +183,8 @@ class _TabletShell extends StatelessWidget {
             indicatorColor: AppColors.primaryFixed,
             destinations: ShellTab.values.map((tab) {
               return NavigationRailDestination(
-                icon: Icon(tab.icon, color: AppColors.outline),
-                selectedIcon: Icon(tab.icon, color: AppColors.primary),
+                icon: _ShellIcon(tab: tab, size: 25),
+                selectedIcon: _ShellIcon(tab: tab, size: 25),
                 label: Text(
                   tab.label,
                   style: AppTypography.labelSm.copyWith(
@@ -218,21 +230,17 @@ class _DesktopShell extends StatelessWidget {
               child: Column(
                 children: [
                   // ─── Logo ────────────────────────────────────
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.fromLTRB(24, 32, 24, 48),
                     child: Row(
                       children: [
-                        Icon(
-                          Icons.account_balance_rounded,
-                          color: AppColors.primaryContainer,
-                          size: 28,
-                        ),
+                        ClayIcon(asset: ClayAssets.hummingbird, size: 34),
                         SizedBox(width: 12),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Zamora Conecta',
+                              'Mi Zamora',
                               style: TextStyle(
                                 fontFamily: 'Manrope',
                                 fontSize: 20,
@@ -241,7 +249,7 @@ class _DesktopShell extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              'GAD MUNICIPAL DE ZAMORA',
+                              'TIERRA DE AVES Y CASCADAS',
                               style: TextStyle(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w700,
@@ -277,13 +285,7 @@ class _DesktopShell extends StatelessWidget {
                             ),
                             child: Row(
                               children: [
-                                Icon(
-                                  tab.icon,
-                                  size: 20,
-                                  color: selected
-                                      ? AppColors.primary
-                                      : AppColors.outline,
-                                ),
+                                _ShellIcon(tab: tab, size: 24),
                                 const SizedBox(width: 16),
                                 Text(
                                   tab.label,
@@ -311,7 +313,7 @@ class _DesktopShell extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton.icon(
                         onPressed: () => context.go('/incidents'),
-                        icon: const Icon(Icons.campaign_rounded, size: 18),
+                        icon: const ClayIcon(asset: ClayAssets.report, size: 24),
                         label: const Text('Reportar al Municipio'),
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 14),

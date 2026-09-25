@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_typography.dart';
 import '../../../core/theme/app_border_radius.dart';
+import '../../../common_widgets/clay_icon.dart';
 
 final class IncidentsScreen extends StatefulWidget {
   const IncidentsScreen({super.key});
@@ -54,9 +55,9 @@ class _IncidentsScreenState extends State<IncidentsScreen> {
                 spacing: 10,
                 runSpacing: 10,
                 children: [
-                  _CategoryTile(label: 'Baches', icon: Icons.construction_rounded, selected: selectedCategory == 'Baches', onTap: () => setState(() => selectedCategory = 'Baches')),
-                  _CategoryTile(label: 'Alumbrado', icon: Icons.lightbulb_outline, selected: selectedCategory == 'Alumbrado', onTap: () => setState(() => selectedCategory = 'Alumbrado')),
-                  _CategoryTile(label: 'Residuos', icon: Icons.delete_outline, selected: selectedCategory == 'Residuos', onTap: () => setState(() => selectedCategory = 'Residuos')),
+                  _CategoryTile(label: 'Baches', asset: ClayAssets.routes, selected: selectedCategory == 'Baches', onTap: () => setState(() => selectedCategory = 'Baches')),
+                  _CategoryTile(label: 'Alumbrado', asset: ClayAssets.events, selected: selectedCategory == 'Alumbrado', onTap: () => setState(() => selectedCategory = 'Alumbrado')),
+                  _CategoryTile(label: 'Residuos', asset: ClayAssets.routes, selected: selectedCategory == 'Residuos', onTap: () => setState(() => selectedCategory = 'Residuos')),
                 ],
               ),
               const SizedBox(height: 28),
@@ -92,8 +93,8 @@ class _IncidentsScreenState extends State<IncidentsScreen> {
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    const Icon(Icons.map_rounded, size: 64, color: AppColors.outlineVariant),
-                    const Icon(Icons.location_on_rounded, size: 40, color: AppColors.tertiary),
+                    const ClayIcon(asset: ClayAssets.routes, size: 68),
+                    const ClayIcon(asset: ClayAssets.report, size: 42),
                     Positioned(
                       bottom: 12,
                       left: 12,
@@ -103,7 +104,7 @@ class _IncidentsScreenState extends State<IncidentsScreen> {
                         decoration: BoxDecoration(color: AppColors.surfaceContainerLowest.withValues(alpha: 0.9), borderRadius: AppBorderRadius.radiusMd),
                         child: const Row(
                           children: [
-                            Icon(Icons.my_location_rounded, size: 14, color: AppColors.primary),
+                            ClayIcon(asset: ClayAssets.routes, size: 18),
                             SizedBox(width: 8),
                     Expanded(child: Text('Diego de Vaca y 24 de Mayo, Zamora', overflow: TextOverflow.ellipsis)),
                           ],
@@ -118,7 +119,7 @@ class _IncidentsScreenState extends State<IncidentsScreen> {
                 width: double.infinity,
                 child: FilledButton.icon(
                   onPressed: _submitReport,
-                  icon: const Icon(Icons.send_rounded),
+                  icon: const ClayIcon(asset: ClayAssets.report, size: 24),
                   label: const Text('Enviar reporte'),
                 ),
               ),
@@ -135,7 +136,7 @@ class _IncidentsScreenState extends State<IncidentsScreen> {
     showDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
-        icon: const Icon(Icons.check_circle_outline_rounded, color: AppColors.secondary, size: 42),
+        icon: const ClayIcon(asset: ClayAssets.report, size: 52),
         title: const Text('Reporte enviado'),
         content: Text('El GAD Municipal de Zamora recibió tu reporte de $selectedCategory. El número de seguimiento es #ZM-1042.'),
         actions: [
@@ -154,11 +155,11 @@ class _IncidentsScreenState extends State<IncidentsScreen> {
 
 class _CategoryTile extends StatelessWidget {
   final String label;
-  final IconData icon;
+  final String asset;
   final bool selected;
   final VoidCallback onTap;
 
-  const _CategoryTile({required this.label, required this.icon, required this.selected, required this.onTap});
+  const _CategoryTile({required this.label, required this.asset, required this.selected, required this.onTap});
 
   @override
   Widget build(BuildContext context) => InkWell(
@@ -173,7 +174,7 @@ class _CategoryTile extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Icon(icon, color: selected ? AppColors.primary : AppColors.onSurfaceVariant, size: 24),
+              ClayIcon(asset: asset, size: 34),
               const SizedBox(height: 8),
               Text(label, style: AppTypography.labelSm.copyWith(color: selected ? AppColors.primary : AppColors.onSurfaceVariant)),
             ],
