@@ -12,6 +12,7 @@ import '../features/checkout/presentation/checkout_screen.dart';
 import '../features/orders/presentation/order_confirmed_screen.dart';
 import '../features/schedules/presentation/schedule_screen.dart';
 import '../features/settings/presentation/proximity_alert_screen.dart';
+import '../features/payments/presentation/payments_screen.dart';
 import '../features/marketplace/presentation/business_detail_screen.dart';
 import '../features/events/presentation/event_detail_screen.dart';
 import 'adaptive_shell.dart';
@@ -61,6 +62,12 @@ GoRouter _createRouter() {
             path: '/events',
             pageBuilder: (context, state) => const NoTransitionPage(
               child: EventsAgendaScreen(),
+            ),
+          ),
+          GoRoute(
+            path: '/payments',
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: PaymentsScreen(),
             ),
           ),
         ],

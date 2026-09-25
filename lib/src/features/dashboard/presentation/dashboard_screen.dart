@@ -27,6 +27,8 @@ final class DashboardScreen extends ConsumerWidget {
               _buildEmergencyAlert(context),
               const SizedBox(height: 28),
               _buildQuickAccessGrid(context),
+              const SizedBox(height: 20),
+              _buildPaymentsShortcut(context),
               const SizedBox(height: 32),
               _buildNewsSection(context),
               const SizedBox(height: 32),
@@ -34,6 +36,48 @@ final class DashboardScreen extends ConsumerWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildPaymentsShortcut(BuildContext context) {
+    return TonalCard(
+      onTap: () => context.go('/payments'),
+      padding: const EdgeInsets.all(20),
+      color: AppColors.primaryFixed.withValues(alpha: 0.55),
+      child: Row(
+        children: [
+          Container(
+            width: 52,
+            height: 52,
+            decoration: BoxDecoration(
+              color: AppColors.primary,
+              borderRadius: AppBorderRadius.radiusLg,
+            ),
+            child: const Icon(
+              Icons.account_balance_wallet_rounded,
+              color: AppColors.onPrimary,
+              size: 26,
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Pagos municipales', style: AppTypography.titleMd),
+                const SizedBox(height: 3),
+                Text(
+                  'Consulta tus obligaciones y genera un comprobante demo.',
+                  style: AppTypography.bodySm.copyWith(
+                    color: AppColors.onSurfaceVariant,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Icon(Icons.arrow_forward_rounded, color: AppColors.primary),
+        ],
       ),
     );
   }
