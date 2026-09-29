@@ -19,23 +19,23 @@ final class _TourismScreenState extends State<TourismScreen> {
   String _selectedCategory = _allCategory;
 
   static const _places = <_TourismPlace>[
-    _TourismPlace(title: 'Parque Nacional Podocarpus', category: 'Naturaleza', description: 'Un bosque protegido para caminar, observar aves y descubrir la biodiversidad andino-amazónica.', activity: 'Senderismo · fotografía · aviturismo', imageUrl: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=85', asset: ClayAssets.toucan),
-    _TourismPlace(title: 'Río Bombuscaro', category: 'Agua y cascadas', description: 'Un recorrido de agua y selva, ideal para conectar con el paisaje y observar aves en la mañana.', activity: 'Naturaleza · observación de aves · baño recreativo', imageUrl: 'https://images.unsplash.com/photo-1437482078695-73f5ca6c96e2?auto=format&fit=crop&w=1200&q=85', asset: ClayAssets.rain),
-    _TourismPlace(title: 'Cascada Velo de Novia', category: 'Agua y cascadas', description: 'Una caída de agua de 60 metros con mirador y vegetación tropical en la vía hacia Loja.', activity: 'Caminata · mirador · fotografía', imageUrl: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1200&q=85', asset: ClayAssets.rain),
-    _TourismPlace(title: 'Cascada La Chismosa', category: 'Agua y cascadas', description: 'Un punto natural de visita dentro del entorno de Podocarpus, entre senderos y bosque nublado.', activity: 'Senderismo · paisaje · fotografía', imageUrl: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=1200&q=85', asset: ClayAssets.hummingbird),
-    _TourismPlace(title: 'Cascada La Poderosa', category: 'Agua y cascadas', description: 'Una alternativa para explorar el paisaje de agua, bosque y senderos del área protegida.', activity: 'Caminata · naturaleza · fotografía', imageUrl: 'https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?auto=format&fit=crop&w=1200&q=85', asset: ClayAssets.rain),
-    _TourismPlace(title: 'Laguna de los Compadres', category: 'Naturaleza', description: 'Un destino de altura para vivir una experiencia de senderismo y contemplación en el Podocarpus.', activity: 'Trekking · camping · fotografía', imageUrl: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=85', asset: ClayAssets.toucan),
-    _TourismPlace(title: 'Cerro La Yamila', category: 'Miradores y paisaje', description: 'Un punto para apreciar el relieve verde y la transición entre la ciudad y la selva zamorana.', activity: 'Paisaje · fotografía · caminata', imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85', asset: ClayAssets.ubicacion),
-    _TourismPlace(title: 'Balnearios Las Ballenas', category: 'Agua y descanso', description: 'Un espacio de recreación para refrescarse y pasar el día rodeado de naturaleza.', activity: 'Descanso · recreación · naturaleza', imageUrl: 'https://images.unsplash.com/photo-1439066615861-d1af74d74000?auto=format&fit=crop&w=1200&q=85', asset: ClayAssets.rain),
-    _TourismPlace(title: 'Complejo Turístico Santa Elena', category: 'Agua y descanso', description: 'Una opción de visita para combinar descanso, recreación y un día de conexión con el entorno.', activity: 'Recreación · descanso · gastronomía', imageUrl: 'https://images.unsplash.com/photo-1507525425518-2e6e1f8a5b4a?auto=format&fit=crop&w=1200&q=85', asset: ClayAssets.feria),
-    _TourismPlace(title: 'Malecón de Zamora', category: 'Cultura local', description: 'Un paseo urbano junto al río para conocer la vida cotidiana, el paisaje y los sabores de la ciudad.', activity: 'Paseo · gastronomía · cultura', imageUrl: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=85', asset: ClayAssets.artesania),
-    _TourismPlace(title: 'Catedral de Zamora', category: 'Patrimonio', description: 'Un punto de referencia para recorrer la ciudad y acercarse a su historia y arquitectura.', activity: 'Patrimonio · fotografía · paseo urbano', imageUrl: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=85', asset: ClayAssets.events),
-    _TourismPlace(title: 'Monumento a la Etnia Shuar', category: 'Cultura local', description: 'Una parada para reconocer la identidad amazónica y la presencia de la nacionalidad Shuar en Zamora.', activity: 'Cultura · identidad · fotografía', imageUrl: 'https://images.unsplash.com/photo-1533130061792-64b345e4a833?auto=format&fit=crop&w=1200&q=85', asset: ClayAssets.artesania),
-    _TourismPlace(title: 'El Reloj Más Grande del Mundo', category: 'Iconos de Zamora', description: 'Un símbolo de la ciudad y una parada imprescindible para iniciar un recorrido urbano.', activity: 'Paseo · fotografía · ciudad', imageUrl: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=85', asset: ClayAssets.destino),
-    _TourismPlace(title: 'Plaza Cívica', category: 'Cultura local', description: 'Un espacio de encuentro para conocer el pulso de la ciudad y sus actividades comunitarias.', activity: 'Paseo · eventos · cultura', imageUrl: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1200&q=85', asset: ClayAssets.eventoPersona),
-    _TourismPlace(title: 'Monumento a Naya o La Chapetona', category: 'Iconos de Zamora', description: 'Una parada urbana para descubrir personajes y relatos que forman parte de la identidad local.', activity: 'Historia · cultura · fotografía', imageUrl: 'https://images.unsplash.com/photo-1564399579883-451a5d44ec08?auto=format&fit=crop&w=1200&q=85', asset: ClayAssets.artesania),
-    _TourismPlace(title: 'Puente de La Saquea', category: 'Miradores y paisaje', description: 'Un punto del entorno zamorano para contemplar el paisaje y conectar con las rutas de la provincia.', activity: 'Paisaje · fotografía · recorrido', imageUrl: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=85', asset: ClayAssets.ubicacion),
-    _TourismPlace(title: 'Valle de Nambija', category: 'Entorno de Zamora', description: 'Un paisaje de montaña y verde amazónico para ampliar el recorrido por el territorio zamorano.', activity: 'Paisaje · naturaleza · fotografía', imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85', asset: ClayAssets.toucan),
+    _TourismPlace(title: 'Parque Nacional Podocarpus', category: 'Naturaleza', description: 'Un bosque protegido para caminar, observar aves y descubrir la biodiversidad andino-amazónica.', activity: 'Senderismo · fotografía · aviturismo', assetPath: 'assets/images/tourism/podocarpus.jpg', asset: ClayAssets.toucan),
+    _TourismPlace(title: 'Río Bombuscaro', category: 'Agua y cascadas', description: 'Un recorrido de agua y selva, ideal para conectar con el paisaje y observar aves en la mañana.', activity: 'Naturaleza · observación de aves · baño recreativo', assetPath: 'assets/images/tourism/bombuscaro.jpg', asset: ClayAssets.rain),
+    _TourismPlace(title: 'Cascada Velo de Novia', category: 'Agua y cascadas', description: 'Una caída de agua de 60 metros con mirador y vegetación tropical en la vía hacia Loja.', activity: 'Caminata · mirador · fotografía', assetPath: 'assets/images/tourism/velo-de-novia.jpg', asset: ClayAssets.rain),
+    _TourismPlace(title: 'Cascada La Chismosa', category: 'Agua y cascadas', description: 'Un punto natural de visita dentro del entorno de Podocarpus, entre senderos y bosque nublado.', activity: 'Senderismo · paisaje · fotografía', assetPath: 'assets/images/tourism/cascada-bombuscaro.jpg', asset: ClayAssets.hummingbird),
+    _TourismPlace(title: 'Cascada La Poderosa', category: 'Agua y cascadas', description: 'Una alternativa para explorar el paisaje de agua, bosque y senderos del área protegida.', activity: 'Caminata · naturaleza · fotografía', assetPath: 'assets/images/tourism/la-poderosa.jpg', asset: ClayAssets.rain),
+    _TourismPlace(title: 'Laguna de los Compadres', category: 'Naturaleza', description: 'Un destino de altura para vivir una experiencia de senderismo y contemplación en el Podocarpus.', activity: 'Trekking · camping · fotografía', assetPath: 'assets/images/tourism/podocarpus.jpg', asset: ClayAssets.toucan),
+    _TourismPlace(title: 'Cerro La Yamila', category: 'Miradores y paisaje', description: 'Un punto para apreciar el relieve verde y la transición entre la ciudad y la selva zamorana.', activity: 'Paisaje · fotografía · caminata', assetPath: 'assets/images/tourism/nambija.webp', asset: ClayAssets.ubicacion),
+    _TourismPlace(title: 'Balnearios Las Ballenas', category: 'Agua y descanso', description: 'Un espacio de recreación para refrescarse y pasar el día rodeado de naturaleza.', activity: 'Descanso · recreación · naturaleza', assetPath: 'assets/images/tourism/las-ballenas.webp', asset: ClayAssets.rain),
+    _TourismPlace(title: 'Complejo Turístico Santa Elena', category: 'Agua y descanso', description: 'Una opción de visita para combinar descanso, recreación y un día de conexión con el entorno.', activity: 'Recreación · descanso · gastronomía', assetPath: 'assets/images/tourism/santa-elena.webp', asset: ClayAssets.feria),
+    _TourismPlace(title: 'Malecón de Zamora', category: 'Cultura local', description: 'Un paseo urbano junto al río para conocer la vida cotidiana, el paisaje y los sabores de la ciudad.', activity: 'Paseo · gastronomía · cultura', assetPath: 'assets/images/tourism/malecon.webp', asset: ClayAssets.artesania),
+    _TourismPlace(title: 'Catedral de Zamora', category: 'Patrimonio', description: 'Un punto de referencia para recorrer la ciudad y acercarse a su historia y arquitectura.', activity: 'Patrimonio · fotografía · paseo urbano', assetPath: 'assets/images/tourism/catedral.webp', asset: ClayAssets.events),
+    _TourismPlace(title: 'Monumento a la Etnia Shuar', category: 'Cultura local', description: 'Una parada para reconocer la identidad amazónica y la presencia de la nacionalidad Shuar en Zamora.', activity: 'Cultura · identidad · fotografía', assetPath: 'assets/images/tourism/monumento-shuar.webp', asset: ClayAssets.artesania),
+    _TourismPlace(title: 'El Reloj Más Grande del Mundo', category: 'Iconos de Zamora', description: 'Un símbolo de la ciudad y una parada imprescindible para iniciar un recorrido urbano.', activity: 'Paseo · fotografía · ciudad', assetPath: 'assets/images/tourism/reloj.webp', asset: ClayAssets.destino),
+    _TourismPlace(title: 'Plaza Cívica', category: 'Cultura local', description: 'Un espacio de encuentro para conocer el pulso de la ciudad y sus actividades comunitarias.', activity: 'Paseo · eventos · cultura', assetPath: 'assets/images/tourism/plaza-civica.webp', asset: ClayAssets.eventoPersona),
+    _TourismPlace(title: 'Monumento a Naya o La Chapetona', category: 'Iconos de Zamora', description: 'Una parada urbana para descubrir personajes y relatos que forman parte de la identidad local.', activity: 'Historia · cultura · fotografía', assetPath: 'assets/images/tourism/monumento-naya.webp', asset: ClayAssets.artesania),
+    _TourismPlace(title: 'Puente de La Saquea', category: 'Miradores y paisaje', description: 'Un punto del entorno zamorano para contemplar el paisaje y conectar con las rutas de la provincia.', activity: 'Paisaje · fotografía · recorrido', assetPath: 'assets/images/tourism/la-saquea.webp', asset: ClayAssets.ubicacion),
+    _TourismPlace(title: 'Valle de Nambija', category: 'Entorno de Zamora', description: 'Un paisaje de montaña y verde amazónico para ampliar el recorrido por el territorio zamorano.', activity: 'Paisaje · naturaleza · fotografía', assetPath: 'assets/images/tourism/nambija.webp', asset: ClayAssets.toucan),
   ];
 
   List<String> get _categories => <String>[_allCategory, ..._places.map((place) => place.category).toSet()];
@@ -61,7 +61,7 @@ final class _TourismScreenState extends State<TourismScreen> {
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemCount: _categories.length,
-                separatorBuilder: (_, __) => const SizedBox(width: 8),
+                separatorBuilder: (_, _) => const SizedBox(width: 8),
                 itemBuilder: (context, index) {
                   final category = _categories[index];
                   final isSelected = category == _selectedCategory;
@@ -124,7 +124,7 @@ final class _TourismScreenState extends State<TourismScreen> {
       clipBehavior: Clip.antiAlias,
       child: Stack(
         children: [
-          Positioned.fill(child: Opacity(opacity: 0.28, child: ZamoraRemoteImage(url: 'https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1200&q=85', fit: BoxFit.cover))),
+          Positioned.fill(child: Opacity(opacity: 0.28, child: ZamoraRemoteImage(url: '', assetPath: 'assets/images/tourism/podocarpus.jpg', fit: BoxFit.cover))),
           Padding(
             padding: const EdgeInsets.all(24),
             child: Column(
@@ -182,7 +182,7 @@ final class _PlaceCard extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                ZamoraRemoteImage(url: place.imageUrl, borderRadius: const BorderRadius.vertical(top: Radius.circular(AppBorderRadius.xl))),
+                ZamoraRemoteImage(url: '', assetPath: place.assetPath, borderRadius: const BorderRadius.vertical(top: Radius.circular(AppBorderRadius.xl))),
                 Positioned(top: 12, left: 12, child: Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6), decoration: BoxDecoration(color: AppColors.surfaceContainerLowest.withValues(alpha: 0.88), borderRadius: AppBorderRadius.radiusFull), child: Text(place.category, style: AppTypography.labelSm.copyWith(color: AppColors.primary)))),
               ],
             ),
@@ -244,8 +244,8 @@ class _TourismPlace {
   final String category;
   final String description;
   final String activity;
-  final String imageUrl;
+  final String assetPath;
   final String asset;
 
-  const _TourismPlace({required this.title, required this.category, required this.description, required this.activity, required this.imageUrl, required this.asset});
+  const _TourismPlace({required this.title, required this.category, required this.description, required this.activity, required this.assetPath, required this.asset});
 }
