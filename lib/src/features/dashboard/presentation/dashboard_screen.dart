@@ -26,6 +26,8 @@ final class DashboardScreen extends ConsumerWidget {
               const SizedBox(height: 32),
               _buildWelcomeSection(context),
               const SizedBox(height: 20),
+              _buildTourismHero(context),
+              const SizedBox(height: 20),
               _buildEmergencyAlert(context),
               const SizedBox(height: 28),
               _buildQuickAccessGrid(context),
@@ -39,6 +41,39 @@ final class DashboardScreen extends ConsumerWidget {
               _buildAboutLink(context),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTourismHero(BuildContext context) {
+    return TonalCard(
+      padding: EdgeInsets.zero,
+      onTap: () => context.push('/tourism'),
+      color: AppColors.primaryFixed.withValues(alpha: 0.78),
+      child: ClipRRect(
+        borderRadius: AppBorderRadius.radiusXl,
+        child: Stack(
+          children: [
+            Positioned(
+              right: -6,
+              bottom: -12,
+              child: Opacity(opacity: 0.95, child: Image.asset(ClayAssets.toucan, width: 112, height: 112, fit: BoxFit.contain)),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 18, 104, 18),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Descubre Zamora', style: AppTypography.titleLg.copyWith(color: AppColors.onPrimaryFixed)),
+                  const SizedBox(height: 4),
+                  Text('Rutas, aves, cascadas y cultura local para vivir la ciudad.', style: AppTypography.bodySm.copyWith(color: AppColors.onSurfaceVariant)),
+                  const SizedBox(height: 12),
+                  Row(children: [Text('Explorar turismo', style: AppTypography.labelLg.copyWith(color: AppColors.primary)), const SizedBox(width: 6), const Icon(Icons.arrow_forward_rounded, size: 18, color: AppColors.primary)]),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
