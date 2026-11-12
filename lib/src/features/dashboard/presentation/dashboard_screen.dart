@@ -29,6 +29,8 @@ final class DashboardScreen extends ConsumerWidget {
               _buildTourismHero(context),
               const SizedBox(height: 20),
               _buildEmergencyAlert(context),
+              const SizedBox(height: 14),
+              _buildSecurityCard(context),
               const SizedBox(height: 28),
               _buildQuickAccessGrid(context),
               const SizedBox(height: 20),
@@ -290,6 +292,36 @@ final class DashboardScreen extends ConsumerWidget {
               ],
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSecurityCard(BuildContext context) {
+    return TonalCard(
+      onTap: () => context.push('/security'),
+      padding: const EdgeInsets.all(18),
+      color: AppColors.surfaceContainerLowest,
+      child: Row(
+        children: [
+          Container(
+            width: 48,
+            height: 48,
+            decoration: const BoxDecoration(color: AppColors.error, shape: BoxShape.circle),
+            child: const Icon(Icons.shield_rounded, color: AppColors.onError),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Seguridad ciudadana', style: AppTypography.titleMd),
+                const SizedBox(height: 2),
+                Text('Llama al 911, reporta novedades y consulta consejos.', style: AppTypography.bodySm.copyWith(color: AppColors.onSurfaceVariant)),
+              ],
+            ),
+          ),
+          const Icon(Icons.chevron_right_rounded, color: AppColors.outline),
         ],
       ),
     );

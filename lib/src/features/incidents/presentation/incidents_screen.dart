@@ -6,15 +6,22 @@ import '../../../core/theme/app_border_radius.dart';
 import '../../../common_widgets/clay_icon.dart';
 
 final class IncidentsScreen extends StatefulWidget {
-  const IncidentsScreen({super.key});
+  final String? initialCategory;
+  const IncidentsScreen({super.key, this.initialCategory});
 
   @override
   State<IncidentsScreen> createState() => _IncidentsScreenState();
 }
 
 class _IncidentsScreenState extends State<IncidentsScreen> {
-  String selectedCategory = 'Baches';
+  static const _securityCategories = {'Sospechoso', 'Robo', 'Violencia'};
+  static const _allCategories = {'Baches', 'Alumbrado', 'Residuos', ..._securityCategories};
+
+  late String selectedCategory = _allCategories.contains(widget.initialCategory) ? widget.initialCategory! : 'Baches';
+  bool anonymous = true;
   final descriptionController = TextEditingController();
+
+  bool get _isSecurity => _securityCategories.contains(selectedCategory);
 
   @override
   void dispose() {
@@ -58,6 +65,9 @@ class _IncidentsScreenState extends State<IncidentsScreen> {
                   _CategoryTile(label: 'Baches', asset: ClayAssets.routes, selected: selectedCategory == 'Baches', onTap: () => setState(() => selectedCategory = 'Baches')),
                   _CategoryTile(label: 'Alumbrado', asset: ClayAssets.alumbrado, selected: selectedCategory == 'Alumbrado', onTap: () => setState(() => selectedCategory = 'Alumbrado')),
                   _CategoryTile(label: 'Residuos', asset: ClayAssets.recolector, selected: selectedCategory == 'Residuos', onTap: () => setState(() => selectedCategory = 'Residuos')),
+                  _CategoryTile(label: 'Sospechoso', asset: ClayAssets.alerts, selected: selectedCategory == 'Sospechoso', onTap: () => setState(() => selectedCategory = 'Sospechoso')),
+                  _CategoryTile(label: 'Robo', asset: ClayAssets.alerts, selected: selectedCategory == 'Robo', onTap: () => setState(() => selectedCategory = 'Robo')),
+                  _CategoryTile(label: 'Violencia', asset: ClayAssets.alerts, selected: selectedCategory == 'Violencia', onTap: () => setState(() => selectedCategory = 'Violencia')),
                 ],
               ),
               const SizedBox(height: 28),
@@ -113,6 +123,21 @@ class _IncidentsScreenState extends State<IncidentsScreen> {
                   ],
                 ),
               ),
+              if (_isSecurity) ...[
+                const SizedBox(height: 20),
+                Container(
+                  padding: const EdgeInsets.all(14),
+                  decoration: BoxDecoration(color: AppColors.errorContainer.withValues(alpha: 0.4), borderRadius: AppBorderRadius.radiusXl),
+                  child: Text('Si el peligro es inmediato, llama al 911. Este reporte no activa una respuesta de emergencia.', style: AppTypography.bodySm.copyWith(color: AppColors.onErrorContainer)),
+                ),
+                SwitchListTile(
+                  contentPadding: EdgeInsets.zero,
+                  value: anonymous,
+                  onChanged: (v) => setState(() => anonymous = v),
+                  title: const Text('Reportar de forma anónima'),
+                  subtitle: const Text('No se asociará tu nombre al reporte.'),
+                ),
+              ],
               const SizedBox(height: 28),
               SizedBox(
                 width: double.infinity,
@@ -137,7 +162,7 @@ class _IncidentsScreenState extends State<IncidentsScreen> {
       builder: (context) => AlertDialog(
         icon: const ClayIcon(asset: ClayAssets.report, size: 52),
         title: const Text('Reporte enviado'),
-        content: Text('El GAD Municipal de Zamora recibió tu reporte de $selectedCategory. El número de seguimiento es #ZM-1042.'),
+        content: Text('El GAD Municipal de Zamora recibió tu reporte de $selectedCategory${_isSecurity && anonymous ? ' (anónimo)' : ''}. El número de seguimiento es #ZM-1042.'),
         actions: [
           FilledButton(
             onPressed: () {

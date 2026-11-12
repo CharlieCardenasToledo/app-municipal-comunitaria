@@ -19,6 +19,7 @@ import '../features/tourism/presentation/tourism_screen.dart';
 import '../features/tourism/presentation/tourism_guide_screen.dart';
 import '../features/marketplace/presentation/business_detail_screen.dart';
 import '../features/events/presentation/event_detail_screen.dart';
+import '../features/security/presentation/security_screen.dart';
 import 'adaptive_shell.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -52,8 +53,10 @@ GoRouter _createRouter() {
           ),
           GoRoute(
             path: '/incidents',
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: IncidentsScreen(),
+            pageBuilder: (context, state) => NoTransitionPage(
+              child: IncidentsScreen(
+                initialCategory: state.uri.queryParameters['category'],
+              ),
             ),
           ),
           GoRoute(
@@ -125,6 +128,11 @@ GoRouter _createRouter() {
         path: '/payments',
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) => const PaymentsScreen(),
+      ),
+      GoRoute(
+        path: '/security',
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => const SecurityScreen(),
       ),
       GoRoute(
         path: '/about',
